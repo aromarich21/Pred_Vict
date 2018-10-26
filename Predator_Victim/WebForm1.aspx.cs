@@ -84,7 +84,7 @@ namespace Predator_Victim
             checkPoint = Check_value();
             if (checkPoint == true)
             {
-                model.Input_value(float.Parse(TextBox1.Text), float.Parse(TextBox2.Text), float.Parse(TextBox3.Text), float.Parse(TextBox4.Text), float.Parse(TextBox5.Text), float.Parse(TextBox6.Text), float.Parse(TextBox7.Text));
+                model.Input_value(decimal.Parse(TextBox1.Text), decimal.Parse(TextBox2.Text), decimal.Parse(TextBox3.Text), decimal.Parse(TextBox4.Text), decimal.Parse(TextBox5.Text), decimal.Parse(TextBox6.Text), decimal.Parse(TextBox7.Text));
 
 
                 Chart1.Series[0].ChartType = System.Web.UI.DataVisualization.Charting.SeriesChartType.Spline;
@@ -93,15 +93,16 @@ namespace Predator_Victim
                 Chart1.Series[0].Points.AddXY(0, model.Victim_start);
                 Chart1.Series[1].Points.AddXY(0, model.Predator_start);
 
-                model.Calc_count();
+                //model.Calc_count();
 
-                for (int i = 0; i < model.G; i++)
+                for (int i = 1; i < model.G;  i++)
                 {
-                    Chart1.Series[0].Points.AddXY(i +1, model.Victim_count);
-                    Chart1.Series[1].Points.AddXY(i +1, model.Predator_count);
 
                     model.Calc_count();
-                }
+                
+                    Chart1.Series[0].Points.AddXY(i, model.Victim_start);
+                    Chart1.Series[1].Points.AddXY(i, model.Predator_start);
+                 }
             }
             else
                 TextBox1.Text = "error_value";
